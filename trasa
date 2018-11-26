@@ -1,0 +1,24 @@
+package rysowanie;
+import java.awt.Color;
+import java.awt.EventQueue;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.*;
+
+public class trasa extends JFrame {
+	public trasa() {
+		super("Geometria obliczeniowa");
+                EventQueue.invokeLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        setLocation(900, 100);
+                        JPanel panel = new panel();
+                        //panel.setBackground(Color.cyan);
+                        add(panel);
+                        pack();
+                        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                        setVisible(true);
+                    }
+                });
+	}
+}
