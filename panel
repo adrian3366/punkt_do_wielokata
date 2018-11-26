@@ -1,0 +1,49 @@
+package rysowanie;
+import java.awt.*;
+import java.awt.geom.*;
+import javax.swing.JPanel;
+import static punkt_do_wielokąta.Punkt_do_wielokąta.t1;
+import static punkt_do_wielokąta.Punkt_do_wielokąta.wymiar;
+import static punkt_do_wielokąta.Punkt_do_wielokąta.linia;
+
+public class panel extends JPanel {
+	public panel() {
+		setPreferredSize(new Dimension(wymiar+10, wymiar+10));
+	}
+	@Override
+	protected void paintComponent(Graphics g) {
+		Graphics2D g2d = (Graphics2D) g;
+                g2d.setColor(Color.LIGHT_GRAY);      //osie x y
+                for(int i=0; i<wymiar; i=i+wymiar/8){       // wymiar/8 = 400/8 = 50
+                    Line2D os_x = new Line2D.Double(i,0,i,wymiar);
+                    g2d.draw(os_x);
+                    Line2D os_y = new Line2D.Double(0,i,wymiar,i);
+                    g2d.draw(os_y);
+                    if(true){
+                        g2d.drawString(" "+i, i , wymiar);
+                        g2d.drawString(""+i, 10,wymiar-(i+5));
+                    }
+                }
+                g2d.setColor(Color.RED);        //punkty wielokata
+                for(int i=0; i<t1.length; i++){
+                    int xx =t1[i][0],    yy = wymiar-t1[i][1];
+                    Ellipse2D circle = new Ellipse2D.Double(xx-5,yy-5,10,10);
+                    g2d.draw(circle);
+                    g2d.drawString("P"+i, xx + 10, yy);
+                }
+                g2d.setColor(Color.BLACK);      // kształt wielokąta
+                for(int i = 0; i<t1.length-1;i++){
+                    int x1 = t1[i][0],          x2=t1[i+1][0];
+                    int y1 = wymiar-t1[i][1],   y2=wymiar-t1[i+1][1];
+                    Line2D linia2 = new Line2D.Double(x1,y1,x2,y2);
+                    g2d.draw(linia2);
+                }
+                g2d.setColor(Color.BLUE);      // linia
+                    int x1 = linia[0][0],          x2=linia[1][0];
+                    int y1 = wymiar-linia[0][1],   y2=wymiar-linia[1][1];
+                    Line2D linia3 = new Line2D.Double(x1,y1,x2,y2);
+                    g2d.draw(linia3);
+                    g2d.drawString("L 0", x1 + 10, y1);
+                    g2d.drawString("L 1", x2 + 10, y2);
+	}
+}
